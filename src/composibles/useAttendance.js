@@ -10,10 +10,10 @@ let snappedFace = ref().value
 
 function loadLabeledImages(router) {
 	if (savedUsers.length == 0) {
-		useAlert().openAlert('You have no registered users, navigating to register page')
+		useAlert().openAlert('No face found. Please register')
 		Webcam.reset()
 		setTimeout(() => {
-			router.push('/register')
+			router.push('/')
 		}, 3000)
 	
 	} else {
