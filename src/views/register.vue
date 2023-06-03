@@ -1,5 +1,12 @@
 <template>
 	<DefaultLayout>
+		<nav class="navbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><router-link to="/attendanceSheet" class="nav-link">Attendance Sheet</router-link></li>
+				<li class="nav-item"><router-link to="/register" class="nav-link">Register Staff</router-link></li>
+				<li class="nav-item"><router-link to="/" class="nav-link">Logout</router-link></li>
+			</ul>
+		</nav>
 		<div v-if="globalState.registerState.value == 0">
 			<h4 id="alert" class="shadow-2xl w-auto mx-auto outline"></h4>
 			<div class="web-cam">

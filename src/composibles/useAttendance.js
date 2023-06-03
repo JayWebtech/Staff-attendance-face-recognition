@@ -66,7 +66,7 @@ const scanImg = async (router) => {
 					savedUsers[index].date.push(`${new Date().toLocaleTimeString()} of ${new Date().toLocaleDateString()}`)
 					canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
 					useAlert().openAlert(`Attendance has been taken for ${result._label}`)
-					router.push('/attendanceSheet')
+					router.push('/')
 				} 
 			})
 			canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)

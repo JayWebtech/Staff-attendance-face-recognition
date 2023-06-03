@@ -11,11 +11,12 @@
 								<div
 									class="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0"
 								>
+								
 									<h1
 										class="text-4xl text-center sm:text-left font-extrabold sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl outline tracking-wide"
 									>
 										<span class="block xl:inline">
-											<b class="font-bold text-slate-400">F</b>ace <br />
+											<b class="font-bold text-slate-400">KAD</b>POLY STAFF <br />
 											<b class="font-bold text-slate-400">A</b>ttendance <br />
 											<b class="font-bold text-slate-400">S</b>ystem</span
 										>
@@ -29,26 +30,8 @@
 									<div
 										class="relative flex flex-col sm:flex-row gap-4 flex-wrap font-extralight"
 									>
-										<router-link
-											to="/About"
-											class="flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600"
-										>
-											About FAS
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												class="w-5 h-5 ml-1"
-												viewBox="0 0 24 24"
-												fill="none"
-												stroke="currentColor"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-											>
-												<line x1="5" y1="12" x2="19" y2="12"></line>
-												<polyline points="12 5 19 12 12 19"></polyline>
-											</svg>
-										</router-link>
-										<router-link
+										
+										<!-- <router-link
 											to="/register"
 											target="_blank"
 											class="flex items-center w-full px-6 py-3 text-lg text-white bg-indigo-600 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto"
@@ -67,7 +50,7 @@
 												<line x1="5" y1="12" x2="19" y2="12"></line>
 												<polyline points="12 5 19 12 12 19"></polyline>
 											</svg>
-										</router-link>
+										</router-link> -->
 										<router-link
 											to="/takeAttendance"
 											target="_blank"
@@ -89,6 +72,25 @@
 											</svg>
 										</router-link>
 										<router-link
+											to="/Login"
+											class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-indigo-600 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto"
+										>
+											Admin Login
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												class="w-5 h-5 ml-1"
+												viewBox="0 0 24 24"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="2"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<line x1="5" y1="12" x2="19" y2="12"></line>
+												<polyline points="12 5 19 12 12 19"></polyline>
+											</svg>
+										</router-link>
+										<!-- <router-link
 											to="/attendanceSheet"
 											class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-indigo-600 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto"
 										>
@@ -106,7 +108,7 @@
 												<line x1="5" y1="12" x2="19" y2="12"></line>
 												<polyline points="12 5 19 12 12 19"></polyline>
 											</svg>
-										</router-link>
+										</router-link> -->
 									</div>
 								</div>
 							</div>
@@ -117,33 +119,7 @@
 								>
 									<face class="mx-auto" />
 								</div>
-								<div
-									class="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-2xl flex flex-col justify-center items-center mt-5"
-								>
-									<div class="flex gap-4 text-3xl mt-5">
-										<a
-											href="https://github.com/kromate/faceReg"
-											target="_blank"
-											rel="noopener noreferrer"
-										>
-											<i class="lab la-github"></i>
-										</a>
-										<a
-											href="https://twitter.com/kromate_24"
-											target="_blank"
-											rel="noopener noreferrer"
-										>
-											<i class="lab la-twitter"></i>
-										</a>
-										<a
-											href="https://www.youtube.com/channel/UChUl2w6Nl_ckCYSPaTUBYRQ"
-											target="_blank"
-											rel="noopener noreferrer"
-										>
-											<i class="lab la-youtube"></i>
-										</a>
-									</div>
-								</div>
+								
 							</div>
 						</div>
 					</div>

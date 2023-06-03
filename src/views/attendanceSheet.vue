@@ -1,7 +1,14 @@
 <template>
 	<DefaultLayout>
+		<nav class="navbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><router-link to="/attendanceSheet" class="nav-link">Attendance Sheet</router-link></li>
+				<li class="nav-item"><router-link to="/register" class="nav-link">Register Staff</router-link></li>
+				<li class="nav-item"><router-link to="/" class="nav-link">Logout</router-link></li>
+			</ul>
+		</nav>
 		<div class="p-4 mt-12">
-			<h1 class="text-2xl uppercase mb-12">database</h1>
+			<h1 class="text-2xl uppercase mb-12">Attendance Sheet</h1>
 
 			<div
 				class="wrapper border-b-2 bg-white overflow-hidden mx-auto max-w-lg rounded shadow-lg"
@@ -41,10 +48,13 @@
 							<span class="badge bg-green-200 text-green-700 mx-3">{{
 								people.mood
 							}}</span>
+							<span class="badge bg-green-200 text-green-700 mx-3">Attendance Date: {{
+								currentDate
+							}}</span>
 						</div>
 						<div v-if="people.date.length" class="mb-3">
 							<span class="block w-full text-left mb-1 font-normal"
-								>Days present
+							>Days present
 							</span>
 							<div
 								class="flex flex-wrap justify-center md:justify-start mt-2 gap-3"
@@ -53,19 +63,14 @@
 									class="badge bg-black text-white"
 									v-for="n in people.date"
 									:key="n"
-									>{{ n }}</span
+								>{{ n }}</span
 								>
 							</div>
 						</div>
 
 						<div v-else class="mt-4">
 							<h1 class="text-lg">
-								This user hasn't taken any attendance. <br />
-								Go to the
-								<router-link to="/takeAttendance" class="text-indigo-600"
-									>Attendance Page</router-link
-								>
-								to take one
+								No Attendance <br />
 							</h1>
 						</div>
 					</details>
@@ -74,11 +79,11 @@
 
 			<div class="mx-auto max-w-lg" v-else>
 				<h1 class="text-lg">
-					You have no registered users go to the
+					You have no registered users. Go to the
 					<router-link to="/register" class="text-indigo-600"
-						>Register Page</router-link
+					>Register Page</router-link
 					>
-					to create one
+					to register
 				</h1>
 			</div>
 		</div>
@@ -89,6 +94,19 @@
 import { savedUsers } from '../composibles/useState';
 
 console.log(savedUsers);
+</script>
+
+<script>
+export default {
+	data() {
+		return {
+			currentDate: ''
+		};
+	},
+	mounted() {
+		this.currentDate = new Date().toLocaleDateString();
+	}
+};
 </script>
 
 <style scoped>
