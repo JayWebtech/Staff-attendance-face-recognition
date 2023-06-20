@@ -1,18 +1,18 @@
-const Webcam = require("../helper/webcam");
-import { ref } from "vue";
-import { savedUsers } from "./useState";
-const faceapi = require("../helper/faceApi.min.js");
-import { useAlert } from "./useNotification";
-import { useRouter } from "vue-router";
+const Webcam = require('../helper/webcam');
+import { ref } from 'vue';
+import { savedUsers } from './useState';
+const faceapi = require('../helper/faceApi.min.js');
+import { useAlert } from './useNotification';
+import { useRouter } from 'vue-router';
 
 let snappedFace = ref().value;
 
 function loadLabeledImages(router) {
   if (savedUsers.length == 0) {
-    useAlert().openAlert("No face found. Please register");
+    useAlert().openAlert('No face found. Please register');
     Webcam.reset();
     setTimeout(() => {
-      router.push("/");
+      router.push('/');
     }, 3000);
   } else {
     return Promise.all(
@@ -37,8 +37,8 @@ const scanImg = async (router) => {
   const image = new Image();
   image.src = snappedFace;
 
-  const container = document.createElement("div");
-  container.style.position = "relative";
+  const container = document.createElement('div');
+  container.style.position = 'relative';
   document.body.append(container);
 
   const labeledFaceDescriptors = await loadLabeledImages(router);
@@ -74,25 +74,25 @@ const scanImg = async (router) => {
           savedUsers[index].date.push(
             `${new Date().toLocaleTimeString()} of ${new Date().toLocaleDateString()}`
           );
-          canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+          canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
           useAlert().openAlert(
             `Attendance has been taken for ${result._label}`
           );
-          router.push("/");
+          router.push('/');
         }
       });
 
-      canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-      useAlert().openAlert("Unknown User Found, go and register");
+      canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+      useAlert().openAlert('Unknown User Found, go and register');
     });
   }
 };
 
 export const SnapFace = () => {
   const router = useRouter();
-  const video = document.querySelector("#video");
+  const video = document.querySelector('#video');
   let recog;
-  video.addEventListener("play", () => {
+  video.addEventListener('play', () => {
     const canvas = faceapi.createCanvasFromMedia(video);
     document.body.append(canvas);
     const displaySize = { width: video.width, height: video.height };
@@ -107,7 +107,7 @@ export const SnapFace = () => {
           detections,
           displaySize
         );
-        canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+        canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
         faceapi.draw.drawDetections(canvas, resizedDetections);
         faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
 
@@ -115,10 +115,10 @@ export const SnapFace = () => {
           if (resizedDetections.detection.score.toFixed(2) > 0.7) {
             await clearInterval(recog);
             canvas
-              .getContext("2d")
+              .getContext('2d')
               .clearRect(0, 0, canvas.width, canvas.height);
-            document.querySelector("#alert").style.color = "green";
-            document.querySelector("#alert").innerHTML = "Face found";
+            document.querySelector('#alert').style.color = 'green';
+            document.querySelector('#alert').innerHTML = 'Face found';
             Webcam.snap(function (data_uri) {
               snappedFace = data_uri;
             });
@@ -127,13 +127,13 @@ export const SnapFace = () => {
             if (resizedDetections.detection.score.toFixed(2) < 0.7) {
               clearInterval(recog);
             }
-            document.querySelector("#alert").style.color = "red";
-            document.querySelector("#alert").innerHTML =
-              "Can't find a Face, Please Adjust";
+            document.querySelector('#alert').style.color = 'red';
+            document.querySelector('#alert').innerHTML =
+              'Can\'t find a Face, Please Adjust';
           }
         }
       } catch (err) {
-        console.log("something went wrong ====", err);
+        console.log('something went wrong ====', err);
       }
     }, 1000);
   });
