@@ -34,46 +34,49 @@ function loadLabeledImages(router) {
 }
 
 const scanImg = async (router) => {
-
-	const image = new Image()
-	image.src = snappedFace
-	
-	// const image = snappedFace
-	const container = document.createElement('div')
-	container.style.position = 'relative'
-	document.body.append(container)
-	const labeledFaceDescriptors = await loadLabeledImages(router)
-	
-	const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.4)
-
-	const canvas = await faceapi.createCanvasFromMedia(image)
-	document.body.append(canvas)
-	const displaySize = { width: 350, height: 265 }
-	
-	faceapi.matchDimensions(canvas, displaySize)
-	const detection = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors()
-	if (detection.length < 1) {
-		location.reload()
-	} else { 
-		const resizedDetections = faceapi.resizeResults(detection, displaySize)
-		const results = resizedDetections.map((d) => faceMatcher.findBestMatch(d.descriptor))
-		results.forEach((result, i) => {
-			const box = resizedDetections[i].detection.box
-			const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() })
-			drawBox.draw(canvas)
-			savedUsers.map(async (label, index) => { 
-				if (label.name === result._label) {
-					savedUsers[index].date.push(`${new Date().toLocaleTimeString()} of ${new Date().toLocaleDateString()}`)
-					canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
-					useAlert().openAlert(`Attendance has been taken for ${result._label}`)
-					router.push('/')
-				} 
-			})
-			canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
-			useAlert().openAlert('Unknown User Found, go and register')
-		})
+	const image = new Image();
+	image.src = snappedFace;
+  
+	const container = document.createElement('div');
+	container.style.position = 'relative';
+	document.body.append(container);
+  
+	const labeledFaceDescriptors = await loadLabeledImages(router);
+	const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6); // Adjust threshold value as needed
+  
+	const canvas = await faceapi.createCanvasFromMedia(image);
+	document.body.append(canvas);
+	const displaySize = { width: 350, height: 265 };
+	faceapi.matchDimensions(canvas, displaySize);
+  
+	// Resize the image and perform face detection on the resized image
+	const resizedImage = await faceapi.bufferToImage(image); // Convert image to an HTMLImageElement
+	const resizedDetections = await faceapi.detectAllFaces(resizedImage).withFaceLandmarks().withFaceDescriptors();
+  
+	if (resizedDetections.length < 1) {
+	  location.reload();
+	} else {
+	  const results = resizedDetections.map((d) => faceMatcher.findBestMatch(d.descriptor));
+	  results.forEach((result, i) => {
+		const box = resizedDetections[i].detection.box;
+		const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() });
+		drawBox.draw(canvas);
+  
+		savedUsers.map(async (label, index) => {
+		  if (label.name === result._label) {
+			savedUsers[index].date.push(`${new Date().toLocaleTimeString()} of ${new Date().toLocaleDateString()}`);
+			canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+			useAlert().openAlert(`Attendance has been taken for ${result._label}`);
+			router.push('/');
+		  }
+		});
+  
+		canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+		useAlert().openAlert('Unknown User Found, go and register');
+	  });
 	}
-}
+  };
+  
 
 export const SnapFace = () => {
 	const router = useRouter()
