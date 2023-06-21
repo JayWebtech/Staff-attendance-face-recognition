@@ -73,17 +73,6 @@ const scanImg = async (router) => {
 
 export const SnapFace = () => {
 	const router = useRouter()
-
-    
-          
-            
-    
-
-          
-          Expand Down
-    
-    
-  
 	const video = document.querySelector('#video')
 	let recog
 	video.addEventListener('play', () => {
